@@ -44,12 +44,12 @@ public:
     void getPlayerOName(void);
      
     /**
-     * Starts the Game  
+     * Plays the Game  
      *
      * @param void
      * @return void
      */
-    void start();
+    void play();
      
     /**
      * Ask the Players if they would like to play again
