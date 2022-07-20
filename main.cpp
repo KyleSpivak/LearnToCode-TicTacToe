@@ -29,13 +29,14 @@ int main()
         // Check to see if new players
         if(lbSamePlayers == false)
         {
-            // Get User Info
+            // Get Player Info
             lcGame.getPlayerXName();
             lcGame.getPlayerOName();   
         }
         
-        // Start the Game
-        lcGame.start();
+        // Play the Game
+        // Update this Function
+        lcGame.play();
         
         // Ask if players want to play again
         lbPlaying = lcGame.playAgain();
