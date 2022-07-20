@@ -1,4 +1,50 @@
 #include "TicTacToe.h"
+///////////////////////////////////////////////////////////////
+// Update this Code
+
+// Use the following funtions to complete this code
+// CheckForTie(bool), CheckForWinner(bool), DisplayGameboard(), GetMove(bool), InitalizeGameboard(), SwitchPlayer(bool&)
+// Use the following variables to complete the code
+//  bool lbIsPlayerXsTurn, int lnTurnCount, bool mbGameOver, std::string mcClosingStatement
+void TicTacToe::play(void)
+{
+    // Clean the board
+    
+    // Set the game to in progress
+    
+    // Used to determine whos turn it is
+    
+    // Use number of turns to determine if the board is full
+    
+    // Loop while game is in progress
+    
+        // increment the turn
+        
+        // Print the Gameboard
+        
+        // Player selects Move
+        
+        // Check for a winner
+        
+        
+        // Check for Tie
+        
+        
+        // Switch to next player if the game is still going
+        
+    
+    // Print the Gameboard
+    
+    
+    // Print the winner (Closing Statement)
+    
+}
+
+///////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////
+// Do not modify the code Below
+///////////////////////////////////////////////////////////////
 
 // Constructor
 TicTacToe::TicTacToe()
@@ -35,51 +81,7 @@ void TicTacToe::getPlayerOName(void)
     mcPlayerO = lcPlayerO;
 }
  
-// See description in header file
-void TicTacToe::start(void)
-{
-    // Clean the board
-    InitalizeGameboard();
-    
-    // Set so that if they chose to play again
-    mbGameOver = false;
-    
-    // Used to determine whos turn it is
-    bool lbIsXTurn = true;
-    
-    // Used to determine if the board is full
-    int lnTurn = 0;
-    
-    while(mbGameOver == false)
-    {
-        // increment the turn
-        lnTurn += 1;
-        // Print the Gameboard
-        DisplayGameboard();
-        // Player selects Move
-        GetMove(lbIsXTurn);
-        // Check for a winner
-        mbGameOver = CheckForWinner(lbIsXTurn);
-        
-        // Check for Tie
-        if(mbGameOver == false)
-        {
-            mbGameOver = CheckForTie(lnTurn);
-        }
-        
-        // Switch to next player if the game is still going
-        if(mbGameOver == false)
-        {
-            SwitchPlayer(lbIsXTurn);  
-        }
-    }
-    
-    // Print the Gameboard
-    DisplayGameboard();
-    
-    // Prin the winner
-    std::cout << mcClosingStatement << std::endl;
-}
+
  
 // See description in header file
 bool TicTacToe::playAgain(void)
@@ -347,5 +349,3 @@ void TicTacToe::DisplayGameboard(void)
     printf("\tC    %s  |  %s  |  %s \n",macGameBoard[2][0].c_str(), macGameBoard[2][1].c_str(), macGameBoard[2][2].c_str());
     printf("\t        |     |     \n\n");
 }
-
-
