@@ -4,6 +4,7 @@
 TicTacToe::TicTacToe()
 {
     // Initialize Member Variables
+    srand(time(0));
     mbGameOver = false;
 }
 
