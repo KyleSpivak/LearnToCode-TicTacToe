@@ -160,6 +160,16 @@ private:
     bool mbGameOver;
     
     std::string macGameBoard[3][3];
+    int macBoard1Row[3];
+    int macBoard1Col[3];
+    
+    std::string macGameBoard2[3][3];
+    int macBoard2Row[3];
+    int macBoard2Col[3];
+    
+    std::string macGameBoard3[3][3];
+    int macBoard3Row[3];
+    int macBoard3Col[3];
 };
 
 #endif
