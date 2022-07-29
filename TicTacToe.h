@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <stdio.h>
+#include <random>
 
 class TicTacToe
 {
@@ -152,6 +153,14 @@ private:
      */
     void SwitchPlayer(bool& abIsXTurn);
     
+    /**
+     * Randomizes Integer Array 0-2 
+     *
+     * @param int[3] aanRandomArray
+     * @return void
+     */
+    void InitializeRandomArray(void);
+    
     
     ////// Private Variables //////
     std::string mcPlayerX;
@@ -166,10 +175,14 @@ private:
     std::string macGameBoard2[3][3];
     int macBoard2Row[3];
     int macBoard2Col[3];
+    std::string macBoard2ColHdr[3]; 
+    std::string macBoard2RowHdr[3]; 
     
     std::string macGameBoard3[3][3];
     int macBoard3Row[3];
     int macBoard3Col[3];
+    std::string macBoard3ColHdr[3]; 
+    std::string macBoard3RowHdr[3]; 
 };
 
 #endif
