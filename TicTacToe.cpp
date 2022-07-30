@@ -48,7 +48,7 @@ void TicTacToe::start(void)
     // Used to determine if the board is full
     int lnTurn = 0;
     
-    while((mbBoard1GameOver != true && mbBoard2GameOver != true && mbBoard3GameOver != true))
+    while((mbBoard1GameOver != true || mbBoard2GameOver != true || mbBoard3GameOver != true))
     {
         // increment the turn
         lnTurn += 1;
@@ -487,7 +487,7 @@ void TicTacToe::SwitchPlayer(bool& abIsXTurn)
 // See description in header file
 bool TicTacToe::IsTheInputYes(std::string acYesOrNo)
 {
-    if( acYesOrNo == "Yes" || acYesOrNo == "yes" || acYesOrNo == "y")
+    if( acYesOrNo == "Yes" || acYesOrNo == "yes" || acYesOrNo == "y" || acYesOrNo == "Y")
     {
         return true;
     }
@@ -608,6 +608,7 @@ void TicTacToe::InitalizeGameboard(void)
     mbBoard1GameOver = false;
     mbBoard2GameOver = false;
     mbBoard3GameOver = false;
+    mbGameOver = false;
 }
 
 void TicTacToe::InitializeRandomArray(void)
@@ -616,8 +617,13 @@ void TicTacToe::InitializeRandomArray(void)
     std::random_shuffle(macBoard2Row, macBoard2Row + 3);
     std::random_shuffle(macBoard3Row, macBoard3Row + 3);
     
+    while((macBoard2Row[0] == 0 && macBoard2Row[1] == 1 && macBoard2Row[2] == 2))
+    {
+        std::random_shuffle(macBoard2Row, macBoard2Row + 3);
+    }
+    
     // Check to see if arrays are the same
-    while(macBoard2Row[0] == macBoard3Row[0] && macBoard2Row[1] == macBoard3Row[1] && macBoard2Row[2] == macBoard3Row[2])
+    while((macBoard2Row[0] == macBoard3Row[0] && macBoard2Row[1] == macBoard3Row[1] && macBoard2Row[2] == macBoard3Row[2]) || (macBoard3Row[0] == 0 && macBoard3Row[1] == 1 && macBoard3Row[2] == 2))
     {
         std::random_shuffle(macBoard3Row, macBoard3Row + 3);
     }
@@ -627,7 +633,12 @@ void TicTacToe::InitializeRandomArray(void)
     std::random_shuffle(macBoard3Col, macBoard3Col + 3);
     
     // Check to see if arrays are the same
-    while(macBoard2Col[0] == macBoard3Col[0] && macBoard2Col[1] == macBoard3Col[1] && macBoard2Col[2] == macBoard3Col[2])
+    while(macBoard2Col[0] == 0 && macBoard2Col[1] == 1 && macBoard2Col[2] == 2)
+    {
+        std::random_shuffle(macBoard2Col, macBoard2Col + 3);
+    }
+    
+    while((macBoard2Col[0] == macBoard3Col[0] && macBoard2Col[1] == macBoard3Col[1] && macBoard2Col[2] == macBoard3Col[2]) || (macBoard3Col[0] == 0 && macBoard3Col[1] == 1 && macBoard3Col[2] == 2))
     {
         std::random_shuffle(macBoard3Col, macBoard3Col + 3);
     }
@@ -652,11 +663,6 @@ void TicTacToe::InitializeRandomArray(void)
     macBoard3RowHdr[macBoard3Row[1]] = "B";
     macBoard3RowHdr[macBoard3Row[2]] = "C";
     
-    std::cout << "Board 2 Row: " << macBoard2Row[0] << ", " << macBoard2Row[1] << ", " << macBoard2Row[2] << std::endl;
-    std::cout << "Board 3 Row: " << macBoard3Row[0] << ", " << macBoard3Row[1] << ", " << macBoard3Row[2] << std::endl;
-    
-    std::cout << "Board 2 Col: " << macBoard2Col[0] << ", " << macBoard2Col[1] << ", " << macBoard2Col[2] << std::endl;
-    std::cout << "Board 3 Col: " << macBoard3Col[0] << ", " << macBoard3Col[1] << ", " << macBoard3Col[2] << std::endl;
 }
 
 void TicTacToe::ClearScreen(void)
