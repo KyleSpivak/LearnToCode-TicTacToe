@@ -137,6 +137,14 @@ private:
      */
     bool CheckForWinner(bool abIsXTurn);
     
+        /**
+     * Check to see if anyone won 
+     *
+     * @param bool abIsXTurn std::string aacBoard[3][3]
+     * @return bool
+     */
+    bool CheckForWinner(bool abIsXTurn, std::string aacBoard[3][3]);
+    
     /**
      * Check to see if 9 turns have passed without a winner 
      *
@@ -182,7 +190,12 @@ private:
     int macBoard3Row[3];
     int macBoard3Col[3];
     std::string macBoard3ColHdr[3]; 
-    std::string macBoard3RowHdr[3]; 
+    std::string macBoard3RowHdr[3];
+    
+    std::string macBoardWinners[3];
+    bool mbBoard1GameOver;
+    bool mbBoard2GameOver;
+    bool mbBoard3GameOver;
 };
 
 #endif

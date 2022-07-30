@@ -42,16 +42,13 @@ void TicTacToe::start(void)
     // Clean the board
     InitalizeGameboard();
     
-    // Set so that if they chose to play again
-    mbGameOver = false;
-    
     // Used to determine whos turn it is
     bool lbIsXTurn = true;
     
     // Used to determine if the board is full
     int lnTurn = 0;
     
-    while(mbGameOver == false)
+    while((mbBoard1GameOver != true && mbBoard2GameOver != true && mbBoard3GameOver != true))
     {
         // increment the turn
         lnTurn += 1;
@@ -59,13 +56,77 @@ void TicTacToe::start(void)
         DisplayGameboard();
         // Player selects Move
         GetMove(lbIsXTurn);
-        // Check for a winner
-        mbGameOver = CheckForWinner(lbIsXTurn);
         
+        // Check for a winner
+        if(mbBoard1GameOver == false)
+        {
+            mbBoard1GameOver = CheckForWinner(lbIsXTurn, macGameBoard);
+            if(mbBoard1GameOver == true)
+            {
+                if(lbIsXTurn == true)
+                {
+                    macBoardWinners[0] = "X";
+                }
+                else  
+                {
+                    macBoardWinners[0] = "O";
+                }
+            }
+        }
+        if(mbBoard2GameOver == false)
+        {
+            mbBoard2GameOver = CheckForWinner(lbIsXTurn, macGameBoard2);
+            if(mbBoard2GameOver == true)
+            {
+                if(lbIsXTurn == true)
+                {
+                    macBoardWinners[1] = "X";
+                }
+                else  
+                {
+                    macBoardWinners[1] = "O";
+                }
+            }
+        }
+        if(mbBoard3GameOver == false)
+        {
+            mbBoard3GameOver = CheckForWinner(lbIsXTurn, macGameBoard3);
+            if(mbBoard3GameOver == true)
+            {
+                if(lbIsXTurn == true)
+                {
+                    macBoardWinners[2] = "X";
+                }
+                else  
+                {
+                    macBoardWinners[2] = "O";
+                }
+            }
+        }
+
         // Check for Tie
         if(mbGameOver == false)
         {
             mbGameOver = CheckForTie(lnTurn);
+            if(mbGameOver == true)
+            {
+                mbBoard1GameOver = true;
+                mbBoard2GameOver = true;
+                mbBoard3GameOver = true;
+                
+                if(macBoardWinners[0] == " ")
+                {
+                    macBoardWinners[0] = "T";
+                }
+                if(macBoardWinners[1] == " ")
+                {
+                    macBoardWinners[1] = "T";
+                }
+                if(macBoardWinners[2] == " ")
+                {
+                    macBoardWinners[2] = "T";
+                }
+            }
         }
         
         // Switch to next player if the game is still going
@@ -79,7 +140,7 @@ void TicTacToe::start(void)
     DisplayGameboard();
     
     // Prin the winner
-    std::cout << mcClosingStatement << std::endl;
+    std::cout << "Board 1: " << macBoardWinners[0] << " Board 2: " << macBoardWinners[1] <<  " Board 3: " << macBoardWinners[2] << std::endl;
 }
  
 // See description in header file
@@ -155,69 +216,184 @@ bool TicTacToe::ValidateMoveAndUpdate(std::string acMove, const std::string& arc
     if((acMove == "A1" || acMove == "a1") && macGameBoard[macBoard1Row[0]][macBoard1Col[0]] == " ")
     {
         macGameBoard[macBoard1Row[0]][macBoard1Col[0]] = arcXorO;
-        macGameBoard2[macBoard2Row[0]][macBoard2Col[0]] = arcXorO;
-        macGameBoard3[macBoard3Row[0]][macBoard3Col[0]] = arcXorO;
+        if(mbBoard2GameOver != true)
+        {
+            macGameBoard2[macBoard2Row[0]][macBoard2Col[0]] = arcXorO;
+        }
+        if(mbBoard3GameOver != true)
+        {
+            macGameBoard3[macBoard3Row[0]][macBoard3Col[0]] = arcXorO;
+        }
         return true;
     }
     else if((acMove == "A2" || acMove == "a2") && macGameBoard[macBoard1Row[0]][macBoard1Col[1]] == " ")
     {
         macGameBoard[macBoard1Row[0]][macBoard1Col[1]] = arcXorO;
-        macGameBoard2[macBoard2Row[0]][macBoard2Col[1]] = arcXorO;
-        macGameBoard3[macBoard3Row[0]][macBoard3Col[1]] = arcXorO;
+        if(mbBoard2GameOver != true)
+        {
+            macGameBoard2[macBoard2Row[0]][macBoard2Col[1]] = arcXorO;
+        }
+        if(mbBoard3GameOver != true)
+        {
+            macGameBoard3[macBoard3Row[0]][macBoard3Col[1]] = arcXorO;
+        }
         return true;
     }
     else if((acMove == "A3" || acMove == "a3") && macGameBoard[macBoard1Row[0]][macBoard1Col[2]] == " ")
     {
         macGameBoard[macBoard1Row[0]][macBoard1Col[2]] = arcXorO;
-        macGameBoard2[macBoard2Row[0]][macBoard2Col[2]] = arcXorO;
-        macGameBoard3[macBoard3Row[0]][macBoard3Col[2]] = arcXorO;
+        if(mbBoard2GameOver != true)
+        {
+            macGameBoard2[macBoard2Row[0]][macBoard2Col[2]] = arcXorO;
+        }
+        if(mbBoard3GameOver != true)
+        {
+            macGameBoard3[macBoard3Row[0]][macBoard3Col[2]] = arcXorO;
+        }
         return true;
     }
     else if((acMove == "B1" || acMove == "b1") && macGameBoard[macBoard1Row[1]][macBoard1Col[0]] == " ")
     {
-       macGameBoard[macBoard1Row[1]][macBoard1Col[0]] = arcXorO;
-        macGameBoard2[macBoard2Row[1]][macBoard2Col[0]] = arcXorO;
-        macGameBoard3[macBoard3Row[1]][macBoard3Col[0]] = arcXorO;
+        macGameBoard[macBoard1Row[1]][macBoard1Col[0]] = arcXorO;
+        if(mbBoard2GameOver != true)
+        {
+            macGameBoard2[macBoard2Row[1]][macBoard2Col[0]] = arcXorO;
+        }
+        if(mbBoard3GameOver != true)
+        {
+            macGameBoard3[macBoard3Row[1]][macBoard3Col[0]] = arcXorO;
+        }
         return true;
     }
     else if((acMove == "B2" || acMove == "b2") && macGameBoard[macBoard1Row[1]][macBoard1Col[1]] == " ")
     {
         macGameBoard[macBoard1Row[1]][macBoard1Col[1]] = arcXorO;
-        macGameBoard2[macBoard2Row[1]][macBoard2Col[1]] = arcXorO;
-        macGameBoard3[macBoard3Row[1]][macBoard3Col[1]] = arcXorO;
+        if(mbBoard2GameOver != true)
+        {
+            macGameBoard2[macBoard2Row[1]][macBoard2Col[1]] = arcXorO;
+        }
+        if(mbBoard3GameOver != true)
+        {
+            macGameBoard3[macBoard3Row[1]][macBoard3Col[1]] = arcXorO;
+        }
         return true;
     }
     else if((acMove == "B3" || acMove == "b3") && macGameBoard[macBoard1Row[1]][macBoard1Col[2]] == " ")
     {
         macGameBoard[macBoard1Row[1]][macBoard1Col[2]] = arcXorO;
-        macGameBoard2[macBoard2Row[1]][macBoard2Col[2]] = arcXorO;
-        macGameBoard3[macBoard3Row[1]][macBoard3Col[2]] = arcXorO;
+        if(mbBoard2GameOver != true)
+        {
+            macGameBoard2[macBoard2Row[1]][macBoard2Col[2]] = arcXorO;
+        }
+        if(mbBoard3GameOver != true)
+        {
+            macGameBoard3[macBoard3Row[1]][macBoard3Col[2]] = arcXorO;
+        }
         return true;
     }
     else if((acMove == "C1" || acMove == "c1") && macGameBoard[macBoard1Row[2]][macBoard1Col[0]] == " ")
     {
         macGameBoard[macBoard1Row[2]][macBoard1Col[0]] = arcXorO;
-        macGameBoard2[macBoard2Row[2]][macBoard2Col[0]] = arcXorO;
-        macGameBoard3[macBoard3Row[2]][macBoard3Col[0]] = arcXorO;
+        if(mbBoard2GameOver != true)
+        {
+            macGameBoard2[macBoard2Row[2]][macBoard2Col[0]] = arcXorO;
+        }
+        if(mbBoard3GameOver != true)
+        {
+            macGameBoard3[macBoard3Row[2]][macBoard3Col[0]] = arcXorO;
+        }
         return true;
     }
     else if((acMove == "C2" || acMove == "c2") && macGameBoard[macBoard1Row[2]][macBoard1Col[1]] == " ")
     {
         macGameBoard[macBoard1Row[2]][macBoard1Col[1]] = arcXorO;
-        macGameBoard2[macBoard2Row[2]][macBoard2Col[1]] = arcXorO;
-        macGameBoard3[macBoard3Row[2]][macBoard3Col[1]] = arcXorO;
+        if(mbBoard2GameOver != true)
+        {
+            macGameBoard2[macBoard2Row[2]][macBoard2Col[1]] = arcXorO;
+        }
+        if(mbBoard3GameOver != true)
+        {
+            macGameBoard3[macBoard3Row[2]][macBoard3Col[1]] = arcXorO;
+        }
         return true;
     }
     else if((acMove == "C3" || acMove == "c3") && macGameBoard[macBoard1Row[2]][macBoard1Col[2]] == " ")
     {
         macGameBoard[macBoard1Row[2]][macBoard1Col[2]] = arcXorO;
-        macGameBoard2[macBoard2Row[2]][macBoard2Col[2]] = arcXorO;
-        macGameBoard3[macBoard3Row[2]][macBoard3Col[2]] = arcXorO;
+        if(mbBoard2GameOver != true)
+        {
+            macGameBoard2[macBoard2Row[2]][macBoard2Col[2]] = arcXorO;
+        }
+        if(mbBoard3GameOver != true)
+        {
+            macGameBoard3[macBoard3Row[2]][macBoard3Col[2]] = arcXorO;
+        }
         return true;
     }
     else
     {
         // Do nothing with arcXorO
+        return false;
+    }
+}
+
+bool TicTacToe::CheckForWinner(bool abIsXTurn, std::string aacBoard[3][3])
+{
+    std::string lcXorO = " ";
+    std::string lcCurrentPlayer = "";
+    
+    // Deterimine if we are checking for X or O
+    if(abIsXTurn == true)
+    {
+        lcXorO = "X";
+        lcCurrentPlayer = mcPlayerX;
+    }
+    else
+    {
+        lcXorO = "O";
+        lcCurrentPlayer = mcPlayerO;
+    }
+    
+    // Set the Closing Statement
+    mcClosingStatement = lcCurrentPlayer + ", Congratulations you Win!";
+    
+    // Check Horizontals
+    if(aacBoard[0][0] == lcXorO && aacBoard[0][1] == lcXorO && aacBoard[0][2] == lcXorO)
+    {
+        return true;
+    }
+    else if(aacBoard[1][0] == lcXorO && aacBoard[1][1] == lcXorO && aacBoard[1][2] == lcXorO)
+    {
+        return true;
+    }
+    else if(aacBoard[2][0] == lcXorO && aacBoard[2][1] == lcXorO && aacBoard[2][2] == lcXorO)
+    {
+        return true;
+    }
+    // Check Verticals
+    else if(aacBoard[0][0] == lcXorO && aacBoard[1][0] == lcXorO && aacBoard[2][0] == lcXorO)
+    {
+        return true;
+    }
+    else if(aacBoard[0][1] == lcXorO && aacBoard[1][1] == lcXorO && aacBoard[2][1] == lcXorO)
+    {
+        return true;
+    }
+    else if(aacBoard[0][2] == lcXorO && aacBoard[1][2] == lcXorO && aacBoard[2][2] == lcXorO)
+    {
+        return true;
+    }
+    // Check Diagonals
+    else if(aacBoard[0][0] == lcXorO && aacBoard[1][1] == lcXorO && aacBoard[2][2] == lcXorO)
+    {
+        return true;
+    }
+    else if(aacBoard[0][2] == lcXorO && aacBoard[1][1] == lcXorO && aacBoard[2][0] == lcXorO)
+    {
+        return true;
+    }
+    else
+    {
         return false;
     }
 }
@@ -424,6 +600,14 @@ void TicTacToe::InitalizeGameboard(void)
     /////////////////////////////////////////////
     
     InitializeRandomArray();
+    
+    macBoardWinners[0] = " ";
+    macBoardWinners[1] = " ";
+    macBoardWinners[2] = " ";
+    
+    mbBoard1GameOver = false;
+    mbBoard2GameOver = false;
+    mbBoard3GameOver = false;
 }
 
 void TicTacToe::InitializeRandomArray(void)
