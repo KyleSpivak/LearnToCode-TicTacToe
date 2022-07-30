@@ -169,6 +169,14 @@ private:
      */
     void InitializeRandomArray(void);
     
+    /**
+     * Determines Winner based on most Board wins 
+     *
+     * @param int[3] aanRandomArray
+     * @return void
+     */
+    void DetermineWinner(void);
+    
     
     ////// Private Variables //////
     std::string mcPlayerX;

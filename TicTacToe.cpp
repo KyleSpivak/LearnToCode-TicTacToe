@@ -141,6 +141,7 @@ void TicTacToe::start(void)
     
     // Prin the winner
     std::cout << "Board 1: " << macBoardWinners[0] << " Board 2: " << macBoardWinners[1] <<  " Board 3: " << macBoardWinners[2] << std::endl;
+    DetermineWinner();
 }
  
 // See description in header file
@@ -215,7 +216,10 @@ bool TicTacToe::ValidateMoveAndUpdate(std::string acMove, const std::string& arc
 {
     if((acMove == "A1" || acMove == "a1") && macGameBoard[macBoard1Row[0]][macBoard1Col[0]] == " ")
     {
-        macGameBoard[macBoard1Row[0]][macBoard1Col[0]] = arcXorO;
+        if(mbBoard1GameOver != true)
+        {
+            macGameBoard[macBoard1Row[0]][macBoard1Col[0]] = arcXorO;
+        }
         if(mbBoard2GameOver != true)
         {
             macGameBoard2[macBoard2Row[0]][macBoard2Col[0]] = arcXorO;
@@ -228,7 +232,10 @@ bool TicTacToe::ValidateMoveAndUpdate(std::string acMove, const std::string& arc
     }
     else if((acMove == "A2" || acMove == "a2") && macGameBoard[macBoard1Row[0]][macBoard1Col[1]] == " ")
     {
-        macGameBoard[macBoard1Row[0]][macBoard1Col[1]] = arcXorO;
+        if(mbBoard1GameOver != true)
+        {
+            macGameBoard[macBoard1Row[0]][macBoard1Col[1]] = arcXorO;
+        }
         if(mbBoard2GameOver != true)
         {
             macGameBoard2[macBoard2Row[0]][macBoard2Col[1]] = arcXorO;
@@ -241,7 +248,10 @@ bool TicTacToe::ValidateMoveAndUpdate(std::string acMove, const std::string& arc
     }
     else if((acMove == "A3" || acMove == "a3") && macGameBoard[macBoard1Row[0]][macBoard1Col[2]] == " ")
     {
-        macGameBoard[macBoard1Row[0]][macBoard1Col[2]] = arcXorO;
+        if(mbBoard1GameOver != true)
+        {
+            macGameBoard[macBoard1Row[0]][macBoard1Col[2]] = arcXorO;
+        }
         if(mbBoard2GameOver != true)
         {
             macGameBoard2[macBoard2Row[0]][macBoard2Col[2]] = arcXorO;
@@ -254,7 +264,10 @@ bool TicTacToe::ValidateMoveAndUpdate(std::string acMove, const std::string& arc
     }
     else if((acMove == "B1" || acMove == "b1") && macGameBoard[macBoard1Row[1]][macBoard1Col[0]] == " ")
     {
-        macGameBoard[macBoard1Row[1]][macBoard1Col[0]] = arcXorO;
+        if(mbBoard1GameOver != true)
+        {
+            macGameBoard[macBoard1Row[1]][macBoard1Col[0]] = arcXorO;
+        }
         if(mbBoard2GameOver != true)
         {
             macGameBoard2[macBoard2Row[1]][macBoard2Col[0]] = arcXorO;
@@ -267,7 +280,10 @@ bool TicTacToe::ValidateMoveAndUpdate(std::string acMove, const std::string& arc
     }
     else if((acMove == "B2" || acMove == "b2") && macGameBoard[macBoard1Row[1]][macBoard1Col[1]] == " ")
     {
-        macGameBoard[macBoard1Row[1]][macBoard1Col[1]] = arcXorO;
+        if(mbBoard1GameOver != true)
+        {
+            macGameBoard[macBoard1Row[1]][macBoard1Col[1]] = arcXorO;
+        }
         if(mbBoard2GameOver != true)
         {
             macGameBoard2[macBoard2Row[1]][macBoard2Col[1]] = arcXorO;
@@ -280,7 +296,10 @@ bool TicTacToe::ValidateMoveAndUpdate(std::string acMove, const std::string& arc
     }
     else if((acMove == "B3" || acMove == "b3") && macGameBoard[macBoard1Row[1]][macBoard1Col[2]] == " ")
     {
-        macGameBoard[macBoard1Row[1]][macBoard1Col[2]] = arcXorO;
+        if(mbBoard1GameOver != true)
+        {
+            macGameBoard[macBoard1Row[1]][macBoard1Col[2]] = arcXorO;
+        }
         if(mbBoard2GameOver != true)
         {
             macGameBoard2[macBoard2Row[1]][macBoard2Col[2]] = arcXorO;
@@ -293,7 +312,10 @@ bool TicTacToe::ValidateMoveAndUpdate(std::string acMove, const std::string& arc
     }
     else if((acMove == "C1" || acMove == "c1") && macGameBoard[macBoard1Row[2]][macBoard1Col[0]] == " ")
     {
-        macGameBoard[macBoard1Row[2]][macBoard1Col[0]] = arcXorO;
+        if(mbBoard1GameOver != true)
+        {
+            macGameBoard[macBoard1Row[2]][macBoard1Col[0]] = arcXorO;
+        }
         if(mbBoard2GameOver != true)
         {
             macGameBoard2[macBoard2Row[2]][macBoard2Col[0]] = arcXorO;
@@ -306,7 +328,10 @@ bool TicTacToe::ValidateMoveAndUpdate(std::string acMove, const std::string& arc
     }
     else if((acMove == "C2" || acMove == "c2") && macGameBoard[macBoard1Row[2]][macBoard1Col[1]] == " ")
     {
-        macGameBoard[macBoard1Row[2]][macBoard1Col[1]] = arcXorO;
+        if(mbBoard1GameOver != true)
+        {
+            macGameBoard[macBoard1Row[2]][macBoard1Col[1]] = arcXorO;
+        }
         if(mbBoard2GameOver != true)
         {
             macGameBoard2[macBoard2Row[2]][macBoard2Col[1]] = arcXorO;
@@ -319,7 +344,10 @@ bool TicTacToe::ValidateMoveAndUpdate(std::string acMove, const std::string& arc
     }
     else if((acMove == "C3" || acMove == "c3") && macGameBoard[macBoard1Row[2]][macBoard1Col[2]] == " ")
     {
-        macGameBoard[macBoard1Row[2]][macBoard1Col[2]] = arcXorO;
+        if(mbBoard1GameOver != true)
+        {
+            macGameBoard[macBoard1Row[2]][macBoard1Col[2]] = arcXorO;
+        }
         if(mbBoard2GameOver != true)
         {
             macGameBoard2[macBoard2Row[2]][macBoard2Col[2]] = arcXorO;
@@ -662,6 +690,38 @@ void TicTacToe::InitializeRandomArray(void)
     macBoard3RowHdr[macBoard3Row[0]] = "A";
     macBoard3RowHdr[macBoard3Row[1]] = "B";
     macBoard3RowHdr[macBoard3Row[2]] = "C";
+    
+}
+
+void TicTacToe::DetermineWinner(void)
+{
+    int lnXWins = 0;
+    int lnOWins = 0;
+    
+    for(int lnBoards = 0; lnBoards < 3; lnBoards++)
+    {
+        if(macBoardWinners[lnBoards] == "X")
+        {
+            lnXWins++;
+        }
+        else if(macBoardWinners[lnBoards] == "O")
+        {
+            lnOWins++;
+        }
+    }
+    
+    if(lnXWins > lnOWins)
+    {
+        std::cout << mcPlayerX << " wins!!!" << mcPlayerX << " had " << lnXWins << " wins and " << mcPlayerO << " had " << lnOWins << " wins" << std::endl;
+    }
+    else if(lnOWins > lnXWins)
+    {
+        std::cout << mcPlayerO << " wins!!!" << mcPlayerX << " had " << lnXWins << " wins and " << mcPlayerO << " had " << lnOWins << " wins" << std::endl;
+    }
+    else
+    {
+        std::cout << "It's a Tie! " << mcPlayerX << " had " << lnXWins << " wins and " << mcPlayerO << " had " << lnOWins << " wins" << std::endl;
+    }
     
 }
 
